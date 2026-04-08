@@ -1,0 +1,166 @@
+@font-face {
+  font-family: 'WarmFarewell';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_11@1.0/Warm_farewell.woff') format('woff');
+  font-weight: normal;
+  font-display: swap;
+}
+
+:root {
+  --primary: #7CB342;
+  --primary-light: #AED581;
+  --primary-lighter: #DCEDC8;
+  --primary-dark: #558B2F;
+  --bg: #F9FBF2;
+  --bg-card: #FFFFFF;
+  --bg-warm: #F1F8E9;
+  --text: #2E3B2E;
+  --text-secondary: #6B7E6B;
+  --text-muted: #9CAF9C;
+  --accent-yellow: #FFE082;
+  --accent-yellow-light: #FFF8E1;
+  --border: #E8F5E9;
+  --shadow: rgba(124, 179, 66, 0.12);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --nav-height: 72px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'WarmFarewell', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  color: inherit;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.page {
+  flex: 1;
+  padding: 20px 16px;
+  padding-bottom: calc(var(--nav-height) + 24px);
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.page-title {
+  font-size: 24px;
+  margin-bottom: 4px;
+  color: var(--primary-dark);
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 2px 12px var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.card + .card {
+  margin-top: 12px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:active {
+  background: var(--primary-dark);
+  transform: scale(0.97);
+}
+
+.btn-secondary {
+  background: var(--primary-lighter);
+  color: var(--primary-dark);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  background: var(--bg);
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--primary-light);
+}
+
+.textarea {
+  min-height: 80px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
