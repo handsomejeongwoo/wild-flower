@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { saveMood } from '../utils/storage'
 
 const moods = [
@@ -21,6 +21,12 @@ export default function MoodJournal() {
   const [note, setNote] = useState('')
   const [saved, setSaved] = useState(false)
   const [prompt] = useState(() => prompts[Math.floor(Math.random() * prompts.length)])
+
+  const handleFocus = useCallback((e) => {
+    setTimeout(() => {
+      e.target.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }, 300)
+  }, [])
 
   const handleSave = () => {
     if (!selected) return
@@ -92,6 +98,7 @@ export default function MoodJournal() {
             placeholder="오늘의 마음을 자유롭게 적어봐..."
             value={note}
             onChange={e => setNote(e.target.value)}
+            onFocus={handleFocus}
           />
         </div>
 

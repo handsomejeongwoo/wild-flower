@@ -12,27 +12,6 @@ const greetings = [
   '비 온 뒤에 더 선명해지는 건 꽃잎도, 너도 같아.',
 ]
 
-const flowers = ['🌸', '🌼', '🌻', '🌺', '🌷', '💐', '🌿', '🍀']
-
-function FlowerDecoration() {
-  return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      gap: '8px',
-      margin: '16px 0',
-      fontSize: '28px',
-    }}>
-      {['🌿', '🌸', '🌱', '🌼', '🌿'].map((f, i) => (
-        <span key={i} style={{
-          animation: `sway 3s ease-in-out ${i * 0.3}s infinite`,
-          display: 'inline-block',
-        }}>{f}</span>
-      ))}
-    </div>
-  )
-}
-
 export default function Home({ onNavigate }) {
   const [greeting, setGreeting] = useState('')
   const [todayMood, setTodayMood] = useState(null)
@@ -46,93 +25,84 @@ export default function Home({ onNavigate }) {
   const timeGreeting = hour < 12 ? '좋은 아침' : hour < 18 ? '좋은 오후' : '좋은 저녁'
 
   return (
-    <div className="page fade-in">
-      <div style={{ textAlign: 'center', padding: '20px 0 12px' }}>
-        <div style={{ fontSize: '64px', marginBottom: '8px' }}>🌸</div>
-        <h1 style={{
-          fontSize: '28px',
-          color: 'var(--primary-dark)',
-          marginBottom: '4px',
-        }}>풀꽃</h1>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>
-          {timeGreeting}이에요
-        </p>
+    <div className="page fade-in" style={{
+      display: 'flex', flexDirection: 'column', justifyContent: 'center',
+      paddingTop: '12px', paddingBottom: 'calc(var(--nav-height) + 12px)',
+    }}>
+      {/* Header */}
+      <div style={{ textAlign: 'center', marginBottom: '12px' }}>
+        <div style={{ fontSize: '48px', marginBottom: '4px' }}>🌸</div>
+        <h1 style={{ fontSize: '26px', color: 'var(--primary-dark)', marginBottom: '2px' }}>풀꽃</h1>
+        <p style={{ color: 'var(--text-muted)', fontSize: '13px' }}>{timeGreeting}이에요</p>
       </div>
 
-      <FlowerDecoration />
-
-      <div className="card" style={{
+      {/* Quote */}
+      <div style={{
         background: 'linear-gradient(135deg, var(--bg-warm), var(--accent-yellow-light))',
+        borderRadius: 'var(--radius)',
         textAlign: 'center',
-        padding: '28px 20px',
+        padding: '20px 16px',
+        marginBottom: '12px',
       }}>
-        <p style={{
-          fontSize: '18px',
-          lineHeight: 1.7,
-          color: 'var(--primary-dark)',
-        }}>
+        <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--primary-dark)' }}>
           "{greeting}"
         </p>
       </div>
 
+      {/* Today mood or CTA */}
       {todayMood ? (
-        <div className="card" style={{ marginTop: '12px', textAlign: 'center' }}>
-          <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '4px' }}>
-            오늘의 감정
-          </p>
-          <span style={{ fontSize: '36px' }}>{todayMood.emoji}</span>
-          <p style={{ fontSize: '15px', marginTop: '4px', color: 'var(--text-secondary)' }}>
+        <div className="card" style={{ textAlign: 'center', padding: '14px', marginBottom: '12px' }}>
+          <span style={{ fontSize: '28px' }}>{todayMood.emoji}</span>
+          <span style={{ fontSize: '14px', color: 'var(--text-secondary)', marginLeft: '8px' }}>
             {todayMood.label}
-          </p>
+          </span>
         </div>
       ) : (
         <button
-          className="card"
           onClick={() => onNavigate('mood')}
           style={{
-            marginTop: '12px',
-            width: '100%',
-            textAlign: 'center',
-            cursor: 'pointer',
-            border: '2px dashed var(--primary-light)',
-            background: 'var(--bg-card)',
+            width: '100%', textAlign: 'center', padding: '14px',
+            borderRadius: 'var(--radius)', marginBottom: '12px',
+            border: '2px dashed var(--primary-light)', background: 'var(--bg-card)',
           }}
         >
-          <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '8px' }}>
-            아직 오늘의 감정을 기록하지 않았어요
-          </p>
-          <p style={{ color: 'var(--primary)', fontSize: '15px' }}>
-            🌱 감정 기록하러 가기
-          </p>
+          <span style={{ color: 'var(--primary)', fontSize: '14px' }}>
+            🌱 오늘의 감정 기록하기
+          </span>
         </button>
       )}
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gap: '10px',
-        marginTop: '12px',
-      }}>
-        <button className="card" onClick={() => onNavigate('thought')} style={{
-          textAlign: 'center', cursor: 'pointer', padding: '16px',
-        }}>
-          <span style={{ fontSize: '28px', display: 'block', marginBottom: '6px' }}>🍃</span>
-          <span style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>생각 정리하기</span>
-        </button>
-        <button className="card" onClick={() => onNavigate('breathing')} style={{
-          textAlign: 'center', cursor: 'pointer', padding: '16px',
-        }}>
-          <span style={{ fontSize: '28px', display: 'block', marginBottom: '6px' }}>🌿</span>
-          <span style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>호흡하기</span>
-        </button>
-      </div>
+      {/* Main action - 생각 정리하기 */}
+      <button
+        onClick={() => onNavigate('thought')}
+        style={{
+          width: '100%', padding: '20px',
+          borderRadius: 'var(--radius)',
+          background: 'var(--primary)',
+          color: 'white',
+          fontSize: '17px',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+          boxShadow: '0 4px 16px rgba(124, 179, 66, 0.3)',
+          marginBottom: '10px',
+        }}
+      >
+        🍃 생각 정리하기
+      </button>
 
-      <style>{`
-        @keyframes sway {
-          0%, 100% { transform: rotate(-5deg); }
-          50% { transform: rotate(5deg); }
-        }
-      `}</style>
+      {/* Secondary action */}
+      <button
+        onClick={() => onNavigate('breathing')}
+        style={{
+          width: '100%', padding: '16px',
+          borderRadius: 'var(--radius)',
+          background: 'var(--primary-lighter)',
+          color: 'var(--primary-dark)',
+          fontSize: '15px',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+        }}
+      >
+        🌿 호흡하기
+      </button>
     </div>
   )
 }

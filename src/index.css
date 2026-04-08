@@ -31,23 +31,26 @@
   box-sizing: border-box;
 }
 
-html, body {
+html {
   height: 100%;
-  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
 }
 
 body {
+  height: 100%;
   font-family: 'WarmFarewell', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 #root {
-  min-height: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 button {
@@ -64,16 +67,20 @@ input, textarea, select {
 }
 
 textarea {
-  resize: vertical;
+  resize: none;
 }
 
 .page {
   flex: 1;
   padding: 20px 16px;
-  padding-bottom: calc(var(--nav-height) + 24px);
+  padding-bottom: calc(var(--nav-height) + 12px);
   max-width: 480px;
   margin: 0 auto;
   width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .page-title {
@@ -142,7 +149,7 @@ textarea {
   padding: 12px 14px;
   border: 1.5px solid var(--border);
   border-radius: var(--radius-sm);
-  font-size: 15px;
+  font-size: 16px;
   background: var(--bg);
   transition: border-color 0.2s;
   outline: none;
